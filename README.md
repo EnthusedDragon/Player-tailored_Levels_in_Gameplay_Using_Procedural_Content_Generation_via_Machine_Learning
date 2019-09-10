@@ -29,7 +29,11 @@ Open Anaconda3 and enter the following commands in order:
 - *cd C:\Users\<username>\ml-agents*
 
 Now ml-agents should be active in Anaconda3 and you can run one of the following commands to train either the Maze Player or Maze Generator if you have the appropriate scene open in Unity3D.
-- **Weak Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train*
-- **Average Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train*
-- **Strong Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train*
-- **Maze Generator:** *mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train*
+- **Weak Maze Player:** 
+  - *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train*
+- **Average Maze Player:** 
+  - *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train*
+- **Strong Maze Player:** 
+  - *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train*
+- **Maze Generator:** 
+  - *mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train*
