@@ -16,7 +16,7 @@ This prototype was created as part of the requirements for Project 4 in the B Te
 - Copy the rest of the folders and files into the (C:\Users\<username>\ml-agents\UnitySDK\Assets) folder and overwrite all if prompted.
 
 
-## Open the UnitySDK project in Unity3D and open the scene you want:
+### Open the UnitySDK project in Unity3D and open the scene you want:
 
 - Demo Scenes
   - DemoMazePlayer
@@ -26,8 +26,13 @@ This prototype was created as part of the requirements for Project 4 in the B Te
   - LearningMazePlayer
   - LearningMazeGenerator
 
-- Anaconda3 Training Commands
-  - **Weak Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train*
-  - **Average Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train*
-  - **Strong Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train*
-  - **Maze Generator:** *mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train*
+### Anaconda3 Training Commands
+Open Anaconda3 and enter the following commands in order:
+- activate ml-agents
+- cd ml-agents
+
+Now ml-agents should be active in Anaconda3 and you can run one of the following commands to train either the Maze Player or Maze Generator if you have the appropriate scene open in Unity3D.
+- **Weak Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train*
+- **Average Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train*
+- **Strong Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train*
+- **Maze Generator:** *mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train*
