@@ -15,11 +15,15 @@ Copy the rest of the folders and files into the (ml-agents/UnitySDK/Assets) fold
 Open the UnitySDK project in Unity3D and open the scene you want:
 
 - Demo Scenes
--- Maze Player Demo
--- Maze Generator Demo
+-- 0. DemoMazePlayer
+-- 0. DemoMazeGenerator
 
 - Learning Scenes (Anaconda3 commands)
--- 1. Weak Maze Player Learning (mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train)
--- 2. Average Player Learning (mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train)
--- 3. Strong Maze Player Learning (mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train)
--- Maze Generator Learning (mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train)
+-- 1. LearningMazePlayer
+-- 1. LearningMazeGenerator
+
+- Anaconda3 Training Commands
+-- Weak Maze Player: mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train
+-- Average Maze Player: mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train
+-- Strong Maze Player: mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train
+-- Maze Generator: mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train

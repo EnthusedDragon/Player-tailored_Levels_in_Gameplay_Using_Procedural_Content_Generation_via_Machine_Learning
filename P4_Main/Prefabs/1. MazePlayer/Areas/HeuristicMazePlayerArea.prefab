@@ -666,9 +666,9 @@ GameObject:
   - component: {fileID: 9074716907196672717}
   - component: {fileID: 5118602462675871494}
   m_Layer: 0
-  m_Name: HeuristicMazePlayerArea
+  m_Name: heuristicMazePlayerArea
   m_TagString: HeuristicArea
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: fbee1fddc738f410ea0b37fe6301d7c0, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -717,6 +717,10 @@ MonoBehaviour:
   mazeRows: 10
   mazeColumns: 10
   Score: {fileID: 4188189385316299650}
+  levelCompleted: 0
+  scoreTotal: 0
+  penaltyThreshold: 0
+  score: 0
   CellSize: 5.4
   distanceFromStartToEnd: 0
 --- !u!1 &7649180767605089547
