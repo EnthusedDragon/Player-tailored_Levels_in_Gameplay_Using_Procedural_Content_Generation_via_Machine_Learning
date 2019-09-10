@@ -19,12 +19,12 @@ This prototype was created as part of the requirements for Project 4 in the B Te
 ## Open the UnitySDK project in Unity3D and open the scene you want:
 
 - Demo Scenes
-  - 0. DemoMazePlayer
-  - 0. DemoMazeGenerator
+  - DemoMazePlayer
+  - DemoMazeGenerator
 
 - Learning Scenes (Anaconda3 commands)
-  - 1. LearningMazePlayer
-  - 1. LearningMazeGenerator
+  - LearningMazePlayer
+  - LearningMazeGenerator
 
 - Anaconda3 Training Commands
   - **Weak Maze Player:** *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train*
