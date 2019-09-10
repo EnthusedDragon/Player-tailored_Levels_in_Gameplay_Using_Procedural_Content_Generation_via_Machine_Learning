@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943466ab374444748a364f9d6c3e2fe2, type: 3}
-  m_Name: mazeGeneratorHeuristic
+  m_Script: {fileID: 11500000, guid: 8b23992c8eb17439887f5e944bf04a40, type: 3}
+  m_Name: mazeGeneratorLearning
   m_EditorClassIdentifier: 
   brainParameters:
     vectorObservationSize: 23
@@ -41,6 +41,5 @@ MonoBehaviour:
     - 
     - 
     vectorActionSpaceType: 0
-  decision: {fileID: 0}
-  decisionScript: {fileID: 11500000, guid: a8ddc732196a78b45920d566c56518df, type: 3}
-  c_decision: MazeGeneratorHeuristic
+  model: {fileID: 5022602860645237092, guid: b7153e7d07fcda04fa22cfb2b72cfa6f, type: 3}
+  inferenceDevice: 0
