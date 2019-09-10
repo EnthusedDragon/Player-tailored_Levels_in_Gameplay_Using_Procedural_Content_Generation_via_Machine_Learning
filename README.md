@@ -27,7 +27,7 @@ Open the UnitySDK project in Unity3D and open the scene you want:
   - 1. LearningMazeGenerator
 
 - Anaconda3 Training Commands
-  - Weak Maze Player: mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train
-  - Average Maze Player: mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train
-  - Strong Maze Player: mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train
-  - Maze Generator: mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train
+  - *Weak Maze Player:* mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerWeak/ --run-id=mazePlayerWeak --train
+  - *Average Maze Player:* mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerAverage/ --run-id=mazePlayerAverage --train
+  - *Strong Maze Player:* mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train
+  - *Maze Generator:* mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train
