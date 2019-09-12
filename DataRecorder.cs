@@ -3,43 +3,45 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class DataRecorder
+public static class DataRecorder
 {
-    private string filePath;
+    private static string filePath = Application.dataPath + "/CSV/Saved_data.csv";
 
-    public DataRecorder()
-    {
-        filePath = Application.dataPath + "/CSV/Saved_data.csv";
-        CreateFile();
-    }
-
-    public DataRecorder(string filePath, string fileName)
-    {
-        this.filePath = filePath + fileName;
-        CreateFile();
-    }
-
-    private void CreateFile()
+    private static void CreateFile()
     {
         if (!File.Exists(filePath))
-            File.CreateText(filePath);
+        {
+            var createdFile = File.CreateText(filePath);
+            createdFile.Dispose();
+        }
     }
 
-    public void AddRecord(List<string> record)
+    public static void WriteRecordToCSV(List<string> record, string fullPath = "")
     {
+        if (fullPath == "")
+        {
+            fullPath = filePath;
+        }
+
+        if (!File.Exists(fullPath))
+        {
+            var createdFile = File.CreateText(fullPath);
+            createdFile.Dispose();
+        }
+
         string delimiter = ",";
 
         StringBuilder sb = new StringBuilder();
 
         sb.AppendLine(string.Join(delimiter, record));
 
-        StreamWriter outStream = File.AppendText(filePath);
+        StreamWriter outStream = File.AppendText(fullPath);
         outStream.WriteLine(sb);
         outStream.Close();
     }
 
-    public void Screenshot(string path, string name)
+    public static void Screenshot(string fullPath)
     {
-        ScreenCapture.CaptureScreenshot(path + name);
+        ScreenCapture.CaptureScreenshot(fullPath);
     }
 }

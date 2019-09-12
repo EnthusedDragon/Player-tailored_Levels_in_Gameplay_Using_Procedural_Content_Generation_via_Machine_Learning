@@ -738,8 +738,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e12214554b24f994b97e42a334792295, type: 2}
     - {fileID: 11400000, guid: 9917a6ba7fc0f074d97a66766fc34e17, type: 2}
     - {fileID: 11400000, guid: f58cb1e6fb04d4e41b9454a2b2878b26, type: 2}
-    _brainsToControl:
-    - {fileID: 11400000, guid: 9917a6ba7fc0f074d97a66766fc34e17, type: 2}
+    _brainsToControl: []
   maxSteps: 0
   trainingConfiguration:
     width: 80
