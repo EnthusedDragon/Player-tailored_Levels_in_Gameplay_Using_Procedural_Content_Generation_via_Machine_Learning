@@ -1,0 +1,4 @@
+GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Size;Seed;MazeComplexity;TotalMillisecondsToGenerate
+MazeGenerator 1;Internal;500000;1;0;1;8;8;16;[44134242223341444144];0;67,9985
+MazeGenerator 1;Internal;500000;2;0;2;9;2;11;[22443112243412242311];0;19,942
+MazeGenerator 1;Internal;500000;3;0;3;9;8;17;[24122333244444324414];0;26,5125

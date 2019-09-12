@@ -37,3 +37,6 @@ Now ml-agents should be active in Anaconda3 and you can run one of the following
   - *mlagents-learn config/trainer_config.yaml --curriculum=config/curricula/mazePlayerStrong/ --run-id=mazePlayerStrong --train*
 - **Maze Generator:** 
   - *mlagents-learn config/trainer_config.yaml --run-id=mazeGenerator --train*
+  
+## Data Archive
+All data generated for training use will be archived under (0. DATA ARCHIVE\0. Training Data\) and data generated for research purposes will be archived under (0. DATA ARCHIVE\1. Research Data\)

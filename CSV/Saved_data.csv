@@ -1,0 +1,10 @@
+PlayerName,PlayerType,StepsTrained,AverageScore,MistakesMade,LevelsComplted,Score,TotalMillisecondsToComplete
+
+MazeGenerator 1,Internal,500000,1,0,1,8,8,44134242223341444144,0,76,0009
+
+GeneratorName,GeneratorType,StepsTrained,PerfectMazesGenerated,MistakesMade,MazeNumber,MazeRows,MazeColumns,Seed,MazeComplexity,TotalMillisecondsToGenerate
+
+MazeGenerator 1,Internal,500000,1,0,1,8,8,44134242223341444144,0,70,002
+
+GeneratorName,GeneratorType,StepsTrained,PerfectMazesGenerated,MistakesMade,MazeNumber,MazeRows,MazeColumns,Seed,MazeComplexity,TotalMillisecondsToGenerate
+MazeGenerator 1,Internal,500000,1,0,1,8,8,44134242223341444144,0,66,0295

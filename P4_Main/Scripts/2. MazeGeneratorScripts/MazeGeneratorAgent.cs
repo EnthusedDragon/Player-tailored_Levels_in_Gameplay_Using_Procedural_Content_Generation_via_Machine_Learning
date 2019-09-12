@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 using System.Text.RegularExpressions;
+using System;
 
 public class MazeGeneratorAgent : Agent
 {
@@ -14,58 +15,95 @@ public class MazeGeneratorAgent : Agent
 
     public MazeCell[,] mazeCells;
     public float CellSize = 5.4f;
-
-    private int mazeRows = 0, mazeColumns = 0;
-    private string seed = "12341234123412341234";
     private int distanceFromStartToEnd = 0;
+
+    // RESEARCH DATA TO BE SAVED
+    public string CSVFilePath;
+    // ONCE OFF STATIC
+    public string GeneratorName;
+    public string GeneratorType;
+    public int StepsTrained;
+
+    // ONCE OFF UPDATED
+    private int PerfectMazesGenerated;
+    private int MistakesMade;
+
+    // CONTINUOUS
+    private int MazeNumber = 0;
+    private int MazeRows = 0, MazeColumns = 0;
+    private string Seed = "12341234123412341234";
+    private int MazeComplexity;
+    private DateTime startGenerating;
 
     public override void InitializeAgent()
     {
+        if (!MazeGeneratorArea.PlayerFileCreated)
+        {
+            var headings = new List<string>()
+            {
+                "GeneratorName",
+                "GeneratorType",
+                "StepsTrained",
+                "PerfectMazesGenerated",
+                "MistakesMade",
+                "MazeNumber",
+                "MazeRows",
+                "MazeColumns",
+                "Seed",
+                "MazeComplexity",
+                "TotalMillisecondsToGenerate"
+            };
+            DataRecorder.WriteRecordToCSV(headings, CSVFilePath);
+            MazeGeneratorArea.PlayerFileCreated = true;
+        }
         AgentReset();
     }
 
     public override void CollectObservations()
     {
+        startGenerating = DateTime.UtcNow;
         // Previous Player Score
         AddVectorObs(MazeGeneratorArea.score);
 
         // Previous Maze Size
-        AddVectorObs(mazeRows);
-        AddVectorObs(mazeColumns);
+        AddVectorObs(MazeRows);
+        AddVectorObs(MazeColumns);
 
         // Previous Difficulty
 
 
         // Previous Seed
-        AddVectorObs(int.Parse($"{seed[0]}"));
-        AddVectorObs(int.Parse($"{seed[1]}"));
-        AddVectorObs(int.Parse($"{seed[2]}"));
-        AddVectorObs(int.Parse($"{seed[3]}"));
-        AddVectorObs(int.Parse($"{seed[4]}"));
-        AddVectorObs(int.Parse($"{seed[5]}"));
-        AddVectorObs(int.Parse($"{seed[6]}"));
-        AddVectorObs(int.Parse($"{seed[7]}"));
-        AddVectorObs(int.Parse($"{seed[8]}"));
-        AddVectorObs(int.Parse($"{seed[9]}"));
-        AddVectorObs(int.Parse($"{seed[10]}"));
-        AddVectorObs(int.Parse($"{seed[11]}"));
-        AddVectorObs(int.Parse($"{seed[12]}"));
-        AddVectorObs(int.Parse($"{seed[13]}"));
-        AddVectorObs(int.Parse($"{seed[14]}"));
-        AddVectorObs(int.Parse($"{seed[15]}"));
-        AddVectorObs(int.Parse($"{seed[16]}"));
-        AddVectorObs(int.Parse($"{seed[17]}"));
-        AddVectorObs(int.Parse($"{seed[18]}"));
-        AddVectorObs(int.Parse($"{seed[19]}"));
+        AddVectorObs(int.Parse($"{Seed[0]}"));
+        AddVectorObs(int.Parse($"{Seed[1]}"));
+        AddVectorObs(int.Parse($"{Seed[2]}"));
+        AddVectorObs(int.Parse($"{Seed[3]}"));
+        AddVectorObs(int.Parse($"{Seed[4]}"));
+        AddVectorObs(int.Parse($"{Seed[5]}"));
+        AddVectorObs(int.Parse($"{Seed[6]}"));
+        AddVectorObs(int.Parse($"{Seed[7]}"));
+        AddVectorObs(int.Parse($"{Seed[8]}"));
+        AddVectorObs(int.Parse($"{Seed[9]}"));
+        AddVectorObs(int.Parse($"{Seed[10]}"));
+        AddVectorObs(int.Parse($"{Seed[11]}"));
+        AddVectorObs(int.Parse($"{Seed[12]}"));
+        AddVectorObs(int.Parse($"{Seed[13]}"));
+        AddVectorObs(int.Parse($"{Seed[14]}"));
+        AddVectorObs(int.Parse($"{Seed[15]}"));
+        AddVectorObs(int.Parse($"{Seed[16]}"));
+        AddVectorObs(int.Parse($"{Seed[17]}"));
+        AddVectorObs(int.Parse($"{Seed[18]}"));
+        AddVectorObs(int.Parse($"{Seed[19]}"));
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        // Call once on demand
-        mazeRows = (int)vectorAction[0] + 2;
-        mazeColumns = (int)vectorAction[1] + 2;
+        MazeNumber++;
 
-        seed = $"" +
+        // Call once on demand
+        MazeRows = (int)vectorAction[0] + 2;
+        MazeColumns = (int)vectorAction[1] + 2;
+
+        Seed = $"" +
             $"{(int)vectorAction[2] + 1}" +
             $"{(int)vectorAction[3] + 1}" +
             $"{(int)vectorAction[4] + 1}" +
@@ -88,14 +126,15 @@ public class MazeGeneratorAgent : Agent
             $"{(int)vectorAction[21] + 1}";
 
         Regex regex = new Regex(@"[05-9]");
-        if (!seed.Contains("1") || !seed.Contains("2") || !seed.Contains("3") || !seed.Contains("4") || regex.IsMatch(seed) || seed.Length != 20)
+        if (!Seed.Contains("1") || !Seed.Contains("2") || !Seed.Contains("3") || !Seed.Contains("4") || regex.IsMatch(Seed) || Seed.Length != 20)
         {
             Done();
             SetReward(-1f);
             MazeGeneratorPlayerAgent.mazeReady = false;
+            MistakesMade++;
             return;
         }
-        
+
         // initialize maze
         InitializeMaze();
         CreateMaze();
@@ -104,7 +143,30 @@ public class MazeGeneratorAgent : Agent
 
         MazeGeneratorArea.scoreTotal = Mathf.CeilToInt(distanceFromStartToEnd * 1.5f);
         MazeGeneratorArea.penaltyThreshold = distanceFromStartToEnd;
+
         MazeGeneratorPlayerAgent.mazeReady = true;
+
+        PerfectMazesGenerated++;        
+
+        // CAPTURE DATA
+        var diff = (DateTime.UtcNow - startGenerating);
+        Debug.Log($"{diff.Minutes}:{diff.Seconds}:{diff.Milliseconds}");
+
+        var data = new List<string>()
+            {
+                GeneratorName,
+                GeneratorType,
+                StepsTrained.ToString(),
+                PerfectMazesGenerated.ToString(),
+                MistakesMade.ToString(),
+                MazeNumber.ToString(),
+                MazeRows.ToString(),
+                MazeColumns.ToString(),
+                $"[{Seed}]",
+                MazeComplexity.ToString(), // TO DO
+                diff.TotalMilliseconds.ToString()
+            };
+        DataRecorder.WriteRecordToCSV(data, CSVFilePath);
     }
 
 
@@ -134,11 +196,11 @@ public class MazeGeneratorAgent : Agent
     private void InitializeMaze()
     {
 
-        mazeCells = new MazeCell[mazeRows, mazeColumns];
+        mazeCells = new MazeCell[MazeRows, MazeColumns];
 
-        for (int r = 0; r < mazeRows; r++)
+        for (int r = 0; r < MazeRows; r++)
         {
-            for (int c = 0; c < mazeColumns; c++)
+            for (int c = 0; c < MazeColumns; c++)
             {
                 mazeCells[r, c] = new MazeCell
                 {
@@ -170,31 +232,36 @@ public class MazeGeneratorAgent : Agent
         }
 
         MazeGeneratorPlayerAgent.transform.position = mazeCells[0, 0].cellParentAndLocation.transform.position;
+
+        var temp = Instantiate(MazeGeneratorPlayerAgent, transform.parent);
+        Destroy(MazeGeneratorPlayerAgent.gameObject);
+        MazeGeneratorPlayerAgent = temp;
+
         MazeGeneratorPlayerAgent.currentCell = mazeCells[0, 0];
 
-        PlayerGoal.transform.position = mazeCells[mazeRows - 1, mazeColumns - 1].cellParentAndLocation.transform.position;
+        PlayerGoal.transform.position = mazeCells[MazeRows - 1, MazeColumns - 1].cellParentAndLocation.transform.position;
     }
 
     private void CreateMaze()
     {
-        MazeAlgorithm ma = new HuntAndKillMazeAlgorithm(mazeCells, seed);
+        MazeAlgorithm ma = new HuntAndKillMazeAlgorithm(mazeCells, Seed);
         ma.CreateMaze();
     }
 
     private void CompleteMaze()
     {
-        for (int r = 0; r < mazeRows; r++)
+        for (int r = 0; r < MazeRows; r++)
         {
-            for (int c = 0; c < mazeColumns; c++)
+            for (int c = 0; c < MazeColumns; c++)
             {
                 if (c == 0 & r == 0)
                     mazeCells[r, c].startCell = true;
 
-                if (c == mazeColumns - 1 & r == mazeRows - 1)
+                if (c == MazeColumns - 1 & r == MazeRows - 1)
                     mazeCells[r, c].endCell = true;
 
                 // LOOK DOWN
-                if (r < mazeRows - 1)
+                if (r < MazeRows - 1)
                 {
                     if (mazeCells[r, c].bottomWall == null && mazeCells[r + 1, c].topWall == null)
                     {
@@ -221,7 +288,7 @@ public class MazeGeneratorAgent : Agent
                 }
 
                 // LOOK RIGHT
-                if (c < mazeColumns - 1)
+                if (c < MazeColumns - 1)
                 {
                     if (mazeCells[r, c].rightWall == null && mazeCells[r, c + 1].leftWall == null)
                     {

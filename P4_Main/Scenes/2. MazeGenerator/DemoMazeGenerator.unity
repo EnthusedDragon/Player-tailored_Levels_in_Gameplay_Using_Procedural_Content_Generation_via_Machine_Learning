@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MazeGeneratorTrainingArea (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 714539822007837436, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4269462625811782218, guid: 7a22cf37e9d3da94c9073d0130890b96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -267,6 +272,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MazeGeneratorTrainingArea (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 714539822007837436, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4269462625811782218, guid: 7a22cf37e9d3da94c9073d0130890b96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -397,7 +407,7 @@ GameObject:
   - component: {fileID: 1253572391}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,6 +488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MazeGeneratorTrainingArea (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 714539822007837436, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4269462625811782218, guid: 7a22cf37e9d3da94c9073d0130890b96,
         type: 3}
@@ -607,6 +622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MazeGeneratorTrainingArea (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 714539822007837436, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4269462625811782218, guid: 7a22cf37e9d3da94c9073d0130890b96,
         type: 3}
@@ -765,6 +785,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MazeGeneratorTrainingArea (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 714539822007837436, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4269462625811782218, guid: 7a22cf37e9d3da94c9073d0130890b96,
         type: 3}
@@ -976,6 +1001,58 @@ PrefabInstance:
         type: 3}
       propertyPath: agentParameters.maxStep
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: agentParameters.resetOnDone
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: agentParameters.onDemandDecision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: PlayerName
+      value: AveragePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: PlayerType
+      value: Internal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: StepsTrained
+      value: 150000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: CSVFilePath
+      value: C:\Users\James\ml-agents\UnitySDK\Assets\0. DATA ARCHIVE\1. Research
+        Data\0. mazePlayer\PlayerData.csv
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: GeneratorName
+      value: MazeGenerator 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: GeneratorType
+      value: Internal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: StepsTrained
+      value: 500000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: CSVFilePath
+      value: C:\Users\James\ml-agents\UnitySDK\Assets\0. DATA ARCHIVE\1. Research
+        Data\1. mazeGenerator\GeneratorDate.csv
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a22cf37e9d3da94c9073d0130890b96, type: 3}
