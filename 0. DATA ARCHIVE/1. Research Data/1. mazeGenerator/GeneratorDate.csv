@@ -1,29 +1,12 @@
 GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToGenerate
-MazeGenerator 1;Internal;500000;1;0;1;8;8;[44134242223341444144];0;70,0268
-MazeGenerator 1;Internal;500000;2;0;2;9;2;[22443112243412242311];0;19,9154
-MazeGenerator 1;Internal;500000;3;0;3;9;8;[24122333244444324414];0;24,9209
-MazeGenerator 1;Internal;500000;4;0;4;2;6;[42433341231433324234];0;19,5984
-MazeGenerator 1;Internal;500000;5;0;5;8;8;[42242242213334141431];0;23,9139
-MazeGenerator 1;Internal;500000;6;0;6;2;2;[24213313124134443312];0;18,9364
-MazeGenerator 1;Internal;500000;7;0;7;6;2;[23431324133433114143];0;19,0294
-MazeGenerator 1;Internal;500000;8;0;8;2;3;[44334131332334214311];0;17,8843
-MazeGenerator 1;Internal;500000;9;0;9;3;3;[23134141244132434114];0;19,8857
-MazeGenerator 1;Internal;500000;10;0;10;9;9;[21414343241311332114];0;26,0002
-MazeGenerator 1;Internal;500000;11;0;11;2;6;[24211444212224333114];0;19,0302
-MazeGenerator 1;Internal;500000;12;0;12;7;2;[44141111314432443432];0;19,9674
+MazeGenerator 1;Internal;500000;1;0;1;3;3;[12341234123412341234];37,33334;14,0002
 GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToGenerate
-MazeGenerator 1;Internal;500000;1;0;1;8;8;[44134242223341444144];0;67,0163
-MazeGenerator 1;Internal;500000;2;0;2;9;2;[22443112243412242311];0;19,9143
-MazeGenerator 1;Internal;500000;3;0;3;9;8;[24122333244444324414];0;31,0009
-MazeGenerator 1;Internal;500000;4;0;4;2;6;[42433341231433324234];0;18,9157
+MazeGenerator 1;Internal;500000;1;0;1;5;5;[12341234123412341234];609,3334;17,0025
 GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToGenerate
-MazeGenerator 1;Internal;500000;1;0;1;8;8;[44134242223341444144];0;76,9695
-MazeGenerator 1;Internal;500000;2;0;2;9;2;[22443112243412242311];0;18,9055
-MazeGenerator 1;Internal;500000;3;0;3;9;8;[24122333244444324414];0;23,9269
-MazeGenerator 1;Internal;500000;4;0;4;2;6;[42433341231433324234];0;19,0281
-MazeGenerator 1;Internal;500000;5;0;5;8;8;[42242242213334141431];0;22,9024
+MazeGenerator 1;Internal;500000;1;0;1;4;4;[12341234123412341234];87;12,9996
 GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToGenerate
-MazeGenerator 1;Internal;500000;1;0;1;8;9;[34424122122413144323];0;20,9994
-MazeGenerator 1;Internal;500000;2;0;2;8;4;[14111222441131344223];0;3,0114
-MazeGenerator 1;Internal;500000;3;0;3;7;5;[24234341343224221142];0;4,0432
-MazeGenerator 1;Internal;500000;4;0;4;8;6;[21441312323214311332];0;5,0178
+MazeGenerator 1;Internal;500000;1;0;1;5;5;[12341234123412341234];609,3334;15,0037
+GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToGenerate
+MazeGenerator 1;Internal;500000;1;0;1;5;5;[12341234123412341234];304,3333;14,9995
+GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToGenerate
+MazeGenerator 1;Internal;500000;1;0;1;10;10;[12341234123412341234];1664;35,8672

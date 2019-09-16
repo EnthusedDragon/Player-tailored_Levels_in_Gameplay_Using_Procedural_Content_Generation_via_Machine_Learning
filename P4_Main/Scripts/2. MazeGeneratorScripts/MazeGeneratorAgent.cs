@@ -4,6 +4,7 @@ using UnityEngine;
 using MLAgents;
 using System.Text.RegularExpressions;
 using System;
+using System.Linq;
 
 public class MazeGeneratorAgent : Agent
 {
@@ -33,7 +34,7 @@ public class MazeGeneratorAgent : Agent
     private int MazeNumber = 0;
     private int MazeRows = 0, MazeColumns = 0;
     private string Seed = "12341234123412341234";
-    private int MazeComplexity;
+    private float MazeComplexity;
     private DateTime startGenerating;
 
     public override void InitializeAgent()
@@ -148,13 +149,13 @@ public class MazeGeneratorAgent : Agent
         MazeGeneratorArea.scoreTotal = Mathf.CeilToInt(distanceFromStartToEnd * 1.5f);
         MazeGeneratorArea.penaltyThreshold = distanceFromStartToEnd;
 
-        MazeGeneratorPlayerAgent.mazeReady = true;
-
         PerfectMazesGenerated++;
 
         // CAPTURE DATA
         var diff = (DateTime.UtcNow - startGenerating);
         Debug.Log($"{diff.Minutes}:{diff.Seconds}:{diff.Milliseconds}");
+
+        MazeComplexity = CalculateComplexity();
 
         if (CaptureData)
         {
@@ -174,6 +175,8 @@ public class MazeGeneratorAgent : Agent
             };
             DataRecorder.WriteRecordToCSV(data, CSVFilePath);
         }
+
+        MazeGeneratorPlayerAgent.mazeReady = true;
     }
 
 
@@ -396,5 +399,134 @@ public class MazeGeneratorAgent : Agent
         }
 
         return distance;
+    }
+
+    public float CalculateComplexity()
+    {
+        MazeCell chosenCell;
+        var complexity = 0f;
+
+        foreach (MazeCell mazeCell in mazeCells)
+        {
+            if (mazeCell.calculated < 1 && mazeCell.cellType == CellType.DeadEnd)
+            {
+                chosenCell = mazeCell;
+                complexity += CalculatePathComplexity(GetPath(mazeCell, FromCell.player));
+            }
+
+            if (mazeCell.calculated < 3 && mazeCell.cellType == CellType.TJunction)
+            {
+                chosenCell = mazeCell;
+                complexity += CalculatePathComplexity(GetPath(mazeCell, FromCell.player));
+                mazeCell.calculated++;
+            }
+
+            if (mazeCell.calculated < 4 && mazeCell.cellType == CellType.XJunction)
+            {
+                chosenCell = mazeCell;
+                complexity += CalculatePathComplexity(GetPath(mazeCell, FromCell.player));
+                mazeCell.calculated++;
+            }
+        }
+        return complexity;
+    }
+
+    public List<MazeCell> GetPath(MazeCell mazeCell, FromCell fromCell)
+    {
+        var path = new List<MazeCell>();
+
+        if ((mazeCell.cellType == CellType.TJunction || mazeCell.cellType == CellType.XJunction) && fromCell != FromCell.player)
+        {
+            path.Add(mazeCell);
+            mazeCell.calculated++;
+            return path;
+        }
+
+        if (mazeCell.topCell != null && fromCell != FromCell.top &&
+            (
+                (mazeCell.topCell.calculated < 1 && (mazeCell.topCell.cellType == CellType.DeadEnd || mazeCell.topCell.cellType == CellType.Corner || mazeCell.topCell.cellType == CellType.Straight)) ||
+                (mazeCell.topCell.calculated < 3 && mazeCell.topCell.cellType == CellType.TJunction) ||
+                (mazeCell.topCell.calculated < 4 && mazeCell.topCell.cellType == CellType.XJunction)
+            )
+        )
+        {
+            path.AddRange(GetPath(mazeCell.topCell, FromCell.bottom));
+            path.Add(mazeCell);
+            mazeCell.calculated++;
+            return path;
+        }
+
+        if (mazeCell.bottomCell != null && fromCell != FromCell.bottom &&
+            (
+                (mazeCell.bottomCell.calculated < 1 && (mazeCell.bottomCell.cellType == CellType.DeadEnd || mazeCell.bottomCell.cellType == CellType.Corner || mazeCell.bottomCell.cellType == CellType.Straight)) ||
+                (mazeCell.bottomCell.calculated < 3 && mazeCell.bottomCell.cellType == CellType.TJunction) ||
+                (mazeCell.bottomCell.calculated < 4 && mazeCell.bottomCell.cellType == CellType.XJunction)
+            )
+        )
+        {
+            path.AddRange(GetPath(mazeCell.bottomCell, FromCell.top));
+            path.Add(mazeCell);
+            mazeCell.calculated++;
+            return path;
+        }
+
+        if (mazeCell.leftCell != null && fromCell != FromCell.left &&
+            (
+                (mazeCell.leftCell.calculated < 1 && (mazeCell.leftCell.cellType == CellType.DeadEnd || mazeCell.leftCell.cellType == CellType.Corner || mazeCell.leftCell.cellType == CellType.Straight)) ||
+                (mazeCell.leftCell.calculated < 3 && mazeCell.leftCell.cellType == CellType.TJunction) ||
+                (mazeCell.leftCell.calculated < 4 && mazeCell.leftCell.cellType == CellType.XJunction)
+            )
+        )
+        {
+            path.AddRange(GetPath(mazeCell.leftCell, FromCell.right));
+            path.Add(mazeCell);
+            mazeCell.calculated++;
+            return path;
+        }
+
+        if (mazeCell.rightCell != null && fromCell != FromCell.right &&
+            (
+                (mazeCell.rightCell.calculated < 1 && (mazeCell.rightCell.cellType == CellType.DeadEnd || mazeCell.rightCell.cellType == CellType.Corner || mazeCell.rightCell.cellType == CellType.Straight)) ||
+                (mazeCell.rightCell.calculated < 3 && mazeCell.rightCell.cellType == CellType.TJunction) ||
+                (mazeCell.rightCell.calculated < 4 && mazeCell.rightCell.cellType == CellType.XJunction)
+            )
+        )
+        {
+            path.AddRange(GetPath(mazeCell.rightCell, FromCell.left));
+            path.Add(mazeCell);
+            mazeCell.calculated++;
+            return path;
+        }
+
+        path.Add(mazeCell);
+        mazeCell.calculated++;
+
+        return path;
+    }
+
+    public float CalculatePathComplexity(List<MazeCell> mazeCells)
+    {
+        var pathSizeCount = 0;
+        var pathlength = 0;
+        var shortPathLength = 0;
+        var complexity = 0f;
+
+        foreach (MazeCell mazeCell in mazeCells)
+        {
+            pathSizeCount++;
+            pathlength++;
+            shortPathLength++;
+
+            if (mazeCell.cellType == CellType.Corner || pathSizeCount == mazeCells.Count)
+            {
+                if (mazeCell.cellType == CellType.Corner)
+                    pathlength++;
+
+                complexity += 1f / shortPathLength;
+                shortPathLength = 1;
+            }
+        }
+
+        return complexity * pathlength;
     }
 }

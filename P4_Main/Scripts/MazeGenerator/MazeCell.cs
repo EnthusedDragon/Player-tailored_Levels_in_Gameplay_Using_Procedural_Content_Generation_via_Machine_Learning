@@ -6,6 +6,7 @@ public class MazeCell
     public bool visited = false;
     public bool startCell = false;
     public bool endCell = false;
+    public int calculated = 0;
     public CellType cellType;
 
     public GameObject cellParentAndLocation;

@@ -1,21 +1,5 @@
-AveragePlayer;Internal;150000;MazeGenerator 1;66;50;1;66;1469,2378
-AveragePlayer;Internal;150000;MazeGenerator 1;33;12;2;66;265,5949
-AveragePlayer;Internal;150000;MazeGenerator 1;22;19;3;66;405,2128
-AveragePlayer;Internal;150000;MazeGenerator 1;16;17;4;66;370,7347
-AveragePlayer;Internal;150000;MazeGenerator 1;13;21;5;66;451,6771
-AveragePlayer;Internal;150000;MazeGenerator 1;11;2;6;66;64,1488
-AveragePlayer;Internal;150000;MazeGenerator 1;9;14;7;66;298,2434
-AveragePlayer;Internal;150000;MazeGenerator 1;8;3;8;66;64,3063
-AveragePlayer;Internal;150000;MazeGenerator 1;7;6;9;66;139,314
-AveragePlayer;Internal;150000;MazeGenerator 1;6;54;10;66;1113,186
-AveragePlayer;Internal;150000;MazeGenerator 1;6;7;11;66;172,6333
-AveragePlayer;Internal;150000;MazeGenerator 1;66;50;1;66;1457,6761
-AveragePlayer;Internal;150000;MazeGenerator 1;33;12;2;0;265,8713
-AveragePlayer;Internal;150000;MazeGenerator 1;22;19;3;0;399,1171
-AveragePlayer;Internal;150000;MazeGenerator 1;66;50;1;66;3456,7088
-AveragePlayer;Internal;150000;MazeGenerator 1;33;12;2;0;263,8304
-AveragePlayer;Internal;150000;MazeGenerator 1;22;19;3;0;397,5731
-AveragePlayer;Internal;150000;MazeGenerator 1;16;17;4;0;363,4473
-AveragePlayer;Internal;150000;MazeGenerator 1;97;21;1;97;887,1442
-AveragePlayer;Internal;150000;MazeGenerator 1;50;21;2;4;454,7087
-AveragePlayer;Internal;150000;MazeGenerator 1;33;17;3;0;371,5254
+PlayerName;PlayerType;StepsTrained;MazeGeneratorName;AverageScore;MistakesMade;LevelsComplted;Score;TotalMillisecondsToComplete
+PlayerName;PlayerType;StepsTrained;MazeGeneratorName;AverageScore;MistakesMade;LevelsComplted;Score;TotalMillisecondsToComplete
+PlayerName;PlayerType;StepsTrained;MazeGeneratorName;AverageScore;MistakesMade;LevelsComplted;Score;TotalMillisecondsToComplete
+PlayerName;PlayerType;StepsTrained;MazeGeneratorName;AverageScore;MistakesMade;LevelsComplted;Score;TotalMillisecondsToComplete
+PlayerName;PlayerType;StepsTrained;MazeGeneratorName;AverageScore;MistakesMade;LevelsComplted;Score;TotalMillisecondsToComplete
