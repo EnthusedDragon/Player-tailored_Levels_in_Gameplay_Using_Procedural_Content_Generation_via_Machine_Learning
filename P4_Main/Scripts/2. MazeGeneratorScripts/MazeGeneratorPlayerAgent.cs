@@ -21,6 +21,7 @@ public class MazeGeneratorPlayerAgent : Agent
     public bool mazeReady = false;
 
     // RESEARCH DATA TO BE SAVED
+    public bool CaptureData = false;
     public string CSVFilePath = "";
     // ONCE OFF STATIC
     public string PlayerName;
@@ -121,21 +122,25 @@ public class MazeGeneratorPlayerAgent : Agent
         PlayerGoal = MazeGeneratorArea.PlayerGoal;
         RayPerception3D = GetComponent<RayPerception3D>();
 
-        if (!MazeGeneratorArea.PlayerFileCreated)
+        if (CaptureData)
         {
-            var headings = new List<string>()
+            if (!MazeGeneratorArea.PlayerFileCreated)
             {
-                "PlayerName",
-                "PlayerType",
-                "StepsTrained",
-                "AverageScore",
-                "MistakesMade",
-                "LevelsComplted",
-                "Score",
-                "TotalMillisecondsToComplete"
-            };
-            DataRecorder.WriteRecordToCSV(headings, CSVFilePath);
-            MazeGeneratorArea.PlayerFileCreated = true;
+                var headings = new List<string>()
+                {
+                    "PlayerName",
+                    "PlayerType",
+                    "StepsTrained",
+                    "MazeGeneratorName",
+                    "AverageScore",
+                    "MistakesMade",
+                    "LevelsComplted",
+                    "Score",
+                    "TotalMillisecondsToComplete"
+                };
+                DataRecorder.WriteRecordToCSV(headings, CSVFilePath);
+                MazeGeneratorArea.PlayerFileCreated = true;
+            }
         }
 
         startTime = DateTime.UtcNow;
@@ -170,23 +175,27 @@ public class MazeGeneratorPlayerAgent : Agent
 
                 MazeGeneratorArea.AverageScore = MazeGeneratorArea.TotalScore / MazeGeneratorArea.levelCompleted;
 
-                Score = MazeGeneratorArea.TotalScore;
+                Score = MazeGeneratorArea.score;
 
                 // CAPTURE DATA
                 var timeDiff = (DateTime.UtcNow - startTime);
 
-                var data = new List<string>()
+                if (CaptureData)
                 {
-                    PlayerName,
-                    PlayerType,
-                    StepsTrained.ToString(),
-                    MazeGeneratorArea.AverageScore.ToString(),
-                    MistakesMade.ToString(),
-                    MazeGeneratorArea.levelCompleted.ToString(),
-                    Score.ToString(),
-                    timeDiff.TotalMilliseconds.ToString()
-                };
-                DataRecorder.WriteRecordToCSV(data, CSVFilePath);
+                    var data = new List<string>()
+                    {
+                        PlayerName,
+                        PlayerType,
+                        StepsTrained.ToString(),
+                        MazeGeneratorAgent.GeneratorName,
+                        MazeGeneratorArea.AverageScore.ToString(),
+                        MistakesMade.ToString(),
+                        MazeGeneratorArea.levelCompleted.ToString(),
+                        Score.ToString(),
+                        timeDiff.TotalMilliseconds.ToString()
+                    };
+                    DataRecorder.WriteRecordToCSV(data, CSVFilePath);
+                }
             }
         }
     }

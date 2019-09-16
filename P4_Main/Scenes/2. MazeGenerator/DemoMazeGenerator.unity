@@ -1033,6 +1033,11 @@ PrefabInstance:
       value: C:\Users\James\ml-agents\UnitySDK\Assets\0. DATA ARCHIVE\1. Research
         Data\0. mazePlayer\PlayerData.csv
       objectReference: {fileID: 0}
+    - target: {fileID: 8257500763699618820, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: CaptureData
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
         type: 3}
       propertyPath: GeneratorName
@@ -1054,5 +1059,16 @@ PrefabInstance:
       value: C:\Users\James\ml-agents\UnitySDK\Assets\0. DATA ARCHIVE\1. Research
         Data\1. mazeGenerator\GeneratorDate.csv
       objectReference: {fileID: 0}
+    - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: CaptureData
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755390951087086191, guid: 7a22cf37e9d3da94c9073d0130890b96,
+        type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: f58cb1e6fb04d4e41b9454a2b2878b26,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a22cf37e9d3da94c9073d0130890b96, type: 3}

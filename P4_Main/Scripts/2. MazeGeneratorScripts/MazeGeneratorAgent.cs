@@ -18,6 +18,7 @@ public class MazeGeneratorAgent : Agent
     private int distanceFromStartToEnd = 0;
 
     // RESEARCH DATA TO BE SAVED
+    public bool CaptureData = false;
     public string CSVFilePath;
     // ONCE OFF STATIC
     public string GeneratorName;
@@ -37,24 +38,27 @@ public class MazeGeneratorAgent : Agent
 
     public override void InitializeAgent()
     {
-        if (!MazeGeneratorArea.PlayerFileCreated)
+        if (CaptureData)
         {
-            var headings = new List<string>()
+            if (!MazeGeneratorArea.PlayerFileCreated)
             {
-                "GeneratorName",
-                "GeneratorType",
-                "StepsTrained",
-                "PerfectMazesGenerated",
-                "MistakesMade",
-                "MazeNumber",
-                "MazeRows",
-                "MazeColumns",
-                "Seed",
-                "MazeComplexity",
-                "TotalMillisecondsToGenerate"
-            };
-            DataRecorder.WriteRecordToCSV(headings, CSVFilePath);
-            MazeGeneratorArea.PlayerFileCreated = true;
+                var headings = new List<string>()
+                {
+                    "GeneratorName",
+                    "GeneratorType",
+                    "StepsTrained",
+                    "PerfectMazesGenerated",
+                    "MistakesMade",
+                    "MazeNumber",
+                    "MazeRows",
+                    "MazeColumns",
+                    "Seed",
+                    "MazeComplexity",
+                    "TotalMillisecondsToGenerate"
+                };
+                DataRecorder.WriteRecordToCSV(headings, CSVFilePath);
+                MazeGeneratorArea.PlayerFileCreated = true;
+            }
         }
         AgentReset();
     }
@@ -146,13 +150,15 @@ public class MazeGeneratorAgent : Agent
 
         MazeGeneratorPlayerAgent.mazeReady = true;
 
-        PerfectMazesGenerated++;        
+        PerfectMazesGenerated++;
 
         // CAPTURE DATA
         var diff = (DateTime.UtcNow - startGenerating);
         Debug.Log($"{diff.Minutes}:{diff.Seconds}:{diff.Milliseconds}");
 
-        var data = new List<string>()
+        if (CaptureData)
+        {
+            var data = new List<string>()
             {
                 GeneratorName,
                 GeneratorType,
@@ -166,7 +172,8 @@ public class MazeGeneratorAgent : Agent
                 MazeComplexity.ToString(), // TO DO
                 diff.TotalMilliseconds.ToString()
             };
-        DataRecorder.WriteRecordToCSV(data, CSVFilePath);
+            DataRecorder.WriteRecordToCSV(data, CSVFilePath);
+        }
     }
 
 
