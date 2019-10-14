@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine;
 using MLAgents;
 
-public class MazeGeneratorArea : Area
+public class PCGMazeGeneratorArea : Area
 {
-    public MazeGeneratorPlayerAgent MazeGeneratorPlayerAgent;
-    public MazeGeneratorAgent MazeGeneratorAgent;
+    public PCGMazeGeneratorPlayerAgent PCGMazeGeneratorPlayerAgent;
+    public PCGMazeGenerator PCGMazeGenerator;
     public GameObject PlayerGoal;
 
     public TextMeshPro Score;
@@ -28,6 +28,6 @@ public class MazeGeneratorArea : Area
         // Reset Maze       
         Score.text = $"Complexity: {complexity}";
 
-        MazeGeneratorAgent.AgentReset();
+        PCGMazeGenerator.AgentReset();
     }
 }

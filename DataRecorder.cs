@@ -109,7 +109,7 @@ public static class DataRecorder
         RenderTexture.active = null; // JC: added to avoid errors
         byte[] bytes = screenShot.EncodeToPNG();
         string filename = Screenshot(fullPath, name);
-        File.WriteAllBytes(filename, bytes);
+        File.WriteAllBytes(Application.dataPath + $"/Screen{width}x{height}.png", bytes);
         Debug.Log(string.Format("Took screenshot to: {0}", filename));
     }
 }

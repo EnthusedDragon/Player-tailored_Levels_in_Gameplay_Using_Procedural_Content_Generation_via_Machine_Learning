@@ -2,21 +2,21 @@
 using MLAgents;
 using System.Collections.Generic;
 
-public class MazePlayerHeuristic : Decision
+public class PCGMazePlayerHeuristic : Decision
 {
-    private MazeGeneratorArea MazePlayerArea;
-    private MazeGeneratorPlayerAgent MazePlayerAgent;
+    private PCGMazeGeneratorArea MazePlayerArea;
+    private PCGMazeGeneratorPlayerAgent MazePlayerAgent;
     
     public override float[] Decide(List<float> vectorObs, List<Texture2D> visualObs, float reward, bool done, List<float> memory)
     {        
         if (MazePlayerArea == null)
         {
-            MazePlayerArea = GameObject.FindGameObjectWithTag("HeuristicArea").GetComponent<MazeGeneratorArea>();
+            MazePlayerArea = GameObject.FindGameObjectWithTag("HeuristicArea").GetComponent<PCGMazeGeneratorArea>();
         }
 
         if (MazePlayerAgent == null)
         {
-            MazePlayerAgent = GameObject.FindGameObjectWithTag("HeuristicAgent").GetComponent<MazeGeneratorPlayerAgent>();
+            MazePlayerAgent = GameObject.FindGameObjectWithTag("HeuristicAgent").GetComponent<PCGMazeGeneratorPlayerAgent>();
         }
 
         var nexPos = new Vector3(vectorObs[0], vectorObs[1], vectorObs[2]);

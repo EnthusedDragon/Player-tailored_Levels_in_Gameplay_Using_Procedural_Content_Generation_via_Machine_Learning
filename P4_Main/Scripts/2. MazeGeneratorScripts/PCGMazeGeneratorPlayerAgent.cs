@@ -6,10 +6,10 @@ using System.Collections.Generic;
 // Note: This agent script is not used for training.
 // Please refer to "MazePlayerAgent.cs" for training purposes.
 // This agent script is used for executing the trained brains against the maze generator models.
-public class MazeGeneratorPlayerAgent : Agent
+public class PCGMazeGeneratorPlayerAgent : Agent
 {
-    public MazeGeneratorAgent MazeGeneratorAgent;
-    private MazeGeneratorArea MazeGeneratorArea;
+    public PCGMazeGenerator MazeGenerator;
+    private PCGMazeGeneratorArea PCGMazeGeneratorArea;
     private RayPerception3D RayPerception3D;
     private GameObject PlayerGoal;
 
@@ -19,22 +19,6 @@ public class MazeGeneratorPlayerAgent : Agent
     public float minimumDistanceFromPlayerGoal = 0.1f;
 
     public bool mazeReady = false;
-
-    // RESEARCH DATA TO BE SAVED
-    public bool CaptureData = false;
-    public string CSVFilePath = "";
-    // ONCE OFF STATIC
-    public string PlayerName;
-    public string PlayerType;
-    public int StepsTrained;
-
-    // ONCE OFF UPDATED
-    private int AverageScore;
-
-    // CONTINUOUS: CAPTURED ON MAZE COMPLETION
-    private int MistakesMade;
-    private int Score;
-    private DateTime startTime;
 
     enum Direction
     {
@@ -57,9 +41,6 @@ public class MazeGeneratorPlayerAgent : Agent
                     currentCell = currentCell.topCell;
                     transform.position = currentCell.cellParentAndLocation.transform.position;
                 }
-                {
-                    MistakesMade++;
-                }
                 break;
             case 2: // DOWN         
                 //Debug.Log("DOWN");
@@ -67,9 +48,6 @@ public class MazeGeneratorPlayerAgent : Agent
                 {
                     currentCell = currentCell.bottomCell;
                     transform.position = currentCell.cellParentAndLocation.transform.position;
-                }
-                {
-                    MistakesMade++;
                 }
                 break;
             case 3: // LEFT         
@@ -79,9 +57,6 @@ public class MazeGeneratorPlayerAgent : Agent
                     currentCell = currentCell.leftCell;
                     transform.position = currentCell.cellParentAndLocation.transform.position;
                 }
-                {
-                    MistakesMade++;
-                }
                 break;
             case 4: // RIGHT         
                 //Debug.Log("RIGHT");
@@ -90,19 +65,15 @@ public class MazeGeneratorPlayerAgent : Agent
                     currentCell = currentCell.rightCell;
                     transform.position = currentCell.cellParentAndLocation.transform.position;
                 }
-                {
-                    MistakesMade++;
-                }
                 break;
             case 0: // DO NOTHING
-                MistakesMade++;
                 break;
         }
     }
 
     public override void AgentOnDone()
     {
-        MazeGeneratorArea.ResetArea();
+        PCGMazeGeneratorArea.ResetArea();
     }
 
     public override void CollectObservations()
@@ -118,32 +89,10 @@ public class MazeGeneratorPlayerAgent : Agent
 
     public override void InitializeAgent()
     {
-        MazeGeneratorArea = GetComponentInParent<MazeGeneratorArea>();
-        PlayerGoal = MazeGeneratorArea.PlayerGoal;
+        PCGMazeGeneratorArea = GetComponentInParent<PCGMazeGeneratorArea>();
+        PlayerGoal = PCGMazeGeneratorArea.PlayerGoal;
         RayPerception3D = GetComponent<RayPerception3D>();
 
-        if (CaptureData)
-        {
-            if (!MazeGeneratorArea.PlayerFileCreated)
-            {
-                var headings = new List<string>()
-                {
-                    "PlayerName",
-                    "PlayerType",
-                    "StepsTrained",
-                    "MazeGeneratorName",
-                    "AverageScore",
-                    "MistakesMade",
-                    "LevelsComplted",
-                    "Score",
-                    "TotalMillisecondsToComplete"
-                };
-                DataRecorder.WriteRecordToCSV(headings, CSVFilePath);
-                MazeGeneratorArea.PlayerFileCreated = true;
-            }
-        }
-
-        startTime = DateTime.UtcNow;
     }
 
 
@@ -157,55 +106,11 @@ public class MazeGeneratorPlayerAgent : Agent
             if (Vector3.Distance(transform.position, PlayerGoal.transform.position) < minimumDistanceFromPlayerGoal)
             {
                 // Calculate percentage from MAZE COMPLEXITY to PATH COMPLEXITY
-                
-                float penalty = MistakesMade;
-                
-                if(MistakesMade > MazeGeneratorArea.penaltyThreshold)
-                {
-                    penalty = Mathf.Abs(MazeGeneratorArea.penaltyThreshold - MistakesMade);
-                }
+                               
 
-                float score = MazeGeneratorArea.scoreTotal - penalty;
-                
-
-                int percentage = Mathf.RoundToInt((score / MazeGeneratorArea.scoreTotal) * 100);
-                MazeGeneratorArea.score = percentage < 0 ? 0 : percentage > 100 ? 100 : percentage;
-                MazeGeneratorArea.TotalScore += MazeGeneratorArea.score;
                 Done();
-                var targetPercentage = 70;
-                var diff = Mathf.Abs(targetPercentage - MazeGeneratorArea.score);
 
-                if (diff > 10)
-                {
-                    MazeGeneratorAgent.AddReward(-((diff - 10) / 100 / stepsTaken));
-                }
-
-                MazeGeneratorArea.levelCompleted++;
                 mazeReady = false;
-
-                MazeGeneratorArea.AverageScore = MazeGeneratorArea.TotalScore / MazeGeneratorArea.levelCompleted;
-
-                Score = MazeGeneratorArea.score;
-
-                // CAPTURE DATA
-                var timeDiff = (DateTime.UtcNow - startTime);
-
-                if (CaptureData)
-                {
-                    var data = new List<string>()
-                    {
-                        PlayerName,
-                        PlayerType,
-                        StepsTrained.ToString(),
-                        MazeGeneratorAgent.GeneratorName,
-                        MazeGeneratorArea.AverageScore.ToString(),
-                        MistakesMade.ToString(),
-                        MazeGeneratorArea.levelCompleted.ToString(),
-                        Score.ToString(),
-                        timeDiff.TotalMilliseconds.ToString()
-                    };
-                    DataRecorder.WriteRecordToCSV(data, CSVFilePath);
-                }
             }
         }
     }

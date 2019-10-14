@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using MLAgents;
 using System.Text.RegularExpressions;
 using System;
-using System.Linq;
-using System.Diagnostics;
 
-public class MazeGeneratorAgent : Agent
+public class PCGMazeGenerator : MonoBehaviour
 {
-    public MazeGeneratorArea MazeGeneratorArea;
-    public MazeGeneratorPlayerAgent MazeGeneratorPlayerAgent;
+    public PCGMazeGeneratorArea MazeGeneratorArea;
+    public PCGMazeGeneratorPlayerAgent MazeGeneratorPlayerAgent;
     public GameObject PlayerGoal;
     public GameObject CellLocationPrefab;
     public GameObject WallPrefab;
@@ -38,7 +34,7 @@ public class MazeGeneratorAgent : Agent
     public float MazeComplexity;
     private DateTime startGenerating;
 
-    public override void InitializeAgent()
+    void Awake()
     {
         if (CaptureData)
         {
@@ -51,7 +47,6 @@ public class MazeGeneratorAgent : Agent
                     "StepsTrained",
                     "PerfectMazesGenerated",
                     "MistakesMade",
-                    "MazeNumber",
                     "MazeRows",
                     "MazeColumns",
                     "Seed",
@@ -65,45 +60,35 @@ public class MazeGeneratorAgent : Agent
         AgentReset();
     }
 
-    public override void CollectObservations()
-    {
-        startGenerating = DateTime.UtcNow;
-        // Previous Player Score
-        AddVectorObs(MazeGeneratorArea.score);
-
-        // Previous Maze Size
-        AddVectorObs(MazeRows);
-        AddVectorObs(MazeColumns);
-
-        // Previous Difficulty
-
-
-        // Previous Seed
-        AddVectorObs(int.Parse($"{Seed[0]}"));
-        AddVectorObs(int.Parse($"{Seed[1]}"));
-        AddVectorObs(int.Parse($"{Seed[2]}"));
-        AddVectorObs(int.Parse($"{Seed[3]}"));
-        AddVectorObs(int.Parse($"{Seed[4]}"));
-        AddVectorObs(int.Parse($"{Seed[5]}"));
-        AddVectorObs(int.Parse($"{Seed[6]}"));
-        AddVectorObs(int.Parse($"{Seed[7]}"));
-        AddVectorObs(int.Parse($"{Seed[8]}"));
-        AddVectorObs(int.Parse($"{Seed[9]}"));
-        AddVectorObs(int.Parse($"{Seed[10]}"));
-        AddVectorObs(int.Parse($"{Seed[11]}"));
-        AddVectorObs(int.Parse($"{Seed[12]}"));
-        AddVectorObs(int.Parse($"{Seed[13]}"));
-        AddVectorObs(int.Parse($"{Seed[14]}"));
-        AddVectorObs(int.Parse($"{Seed[15]}"));
-        AddVectorObs(int.Parse($"{Seed[16]}"));
-        AddVectorObs(int.Parse($"{Seed[17]}"));
-        AddVectorObs(int.Parse($"{Seed[18]}"));
-        AddVectorObs(int.Parse($"{Seed[19]}"));
-    }
-
-    public override void AgentAction(float[] vectorAction, string textAction)
+    public void GenerateMaze()
     {
         MazeNumber++;
+
+        var vectorAction = new float[22]
+        {
+            UnityEngine.Random.Range(0,8),
+            UnityEngine.Random.Range(0,8),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+            UnityEngine.Random.Range(0,4),
+        };
 
         // Call once on demand
         MazeRows = (int)vectorAction[0] + 2;
@@ -134,10 +119,9 @@ public class MazeGeneratorAgent : Agent
         Regex regex = new Regex(@"[05-9]");
         if (!Seed.Contains("1") || !Seed.Contains("2") || !Seed.Contains("3") || !Seed.Contains("4") || regex.IsMatch(Seed) || Seed.Length != 20)
         {
-            Done();
-            SetReward(-1f);
             MazeGeneratorPlayerAgent.mazeReady = false;
             MistakesMade++;
+            MazeGeneratorArea.ResetArea();
             return;
         }
 
@@ -156,6 +140,7 @@ public class MazeGeneratorAgent : Agent
         var diff = (DateTime.UtcNow - startGenerating);
 
         MazeComplexity = CalculateComplexity();
+
         MazeGeneratorArea.complexity = MazeComplexity;
 
         if (CaptureData)
@@ -167,7 +152,6 @@ public class MazeGeneratorAgent : Agent
                 StepsTrained.ToString(),
                 PerfectMazesGenerated.ToString(),
                 MistakesMade.ToString(),
-                MazeNumber.ToString(),
                 MazeRows.ToString(),
                 MazeColumns.ToString(),
                 $"[{Seed}]",
@@ -181,7 +165,7 @@ public class MazeGeneratorAgent : Agent
     }
 
 
-    public override void AgentReset()
+    public void AgentReset()
     {
         // Destroy all walls
         if (mazeCells != null && mazeCells.Length > 0)
@@ -189,7 +173,8 @@ public class MazeGeneratorAgent : Agent
             DestroyMaze();
         }
         // Clear parameters
-        RequestDecision();
+        startGenerating = DateTime.UtcNow;
+        GenerateMaze();
     }
 
     private void DestroyMaze()
