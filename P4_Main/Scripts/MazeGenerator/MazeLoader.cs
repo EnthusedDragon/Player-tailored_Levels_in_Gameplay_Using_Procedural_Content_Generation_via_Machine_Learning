@@ -25,7 +25,7 @@ public class MazeLoader : MonoBehaviour {
     {
 		InitializeMaze ();
 
-        MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells, seed);
+        //MazeAlgorithm ma = new HuntAndKillMazeAlgorithm (mazeCells, seed);
 		//if(ma.CreateMaze ())
   //      {
   //          Academy.SetActive(true);

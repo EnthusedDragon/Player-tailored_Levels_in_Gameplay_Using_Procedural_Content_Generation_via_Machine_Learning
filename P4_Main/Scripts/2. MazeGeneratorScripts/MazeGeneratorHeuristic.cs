@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MazeGeneratorHeuristic : Decision
 {
     private MazeGeneratorArea MazePlayerArea;
-    private MazeGeneratorAgent MazePlayerAgent;
+    private PCGMLMazeGeneratorAgent MazePlayerAgent;
 
     public override float[] Decide(List<float> vectorObs, List<Texture2D> visualObs, float reward, bool done, List<float> memory)
     {

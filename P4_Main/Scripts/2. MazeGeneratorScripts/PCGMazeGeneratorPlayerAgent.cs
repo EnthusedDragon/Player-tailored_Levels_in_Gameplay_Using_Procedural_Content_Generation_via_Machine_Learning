@@ -8,8 +8,7 @@ using System.Collections.Generic;
 // This agent script is used for executing the trained brains against the maze generator models.
 public class PCGMazeGeneratorPlayerAgent : Agent
 {
-    public PCGMazeGenerator MazeGenerator;
-    private PCGMazeGeneratorArea PCGMazeGeneratorArea;
+    private MazeGeneratorArea PCGMazeGeneratorArea;
     private RayPerception3D RayPerception3D;
     private GameObject PlayerGoal;
 
@@ -89,7 +88,7 @@ public class PCGMazeGeneratorPlayerAgent : Agent
 
     public override void InitializeAgent()
     {
-        PCGMazeGeneratorArea = GetComponentInParent<PCGMazeGeneratorArea>();
+        PCGMazeGeneratorArea = GetComponentInParent<MazeGeneratorArea>();
         PlayerGoal = PCGMazeGeneratorArea.PlayerGoal;
         RayPerception3D = GetComponent<RayPerception3D>();
 

@@ -237,8 +237,8 @@ public class MazePlayerArea : Area
 
     private void CreateMaze()
     {
-        MazeAlgorithm ma = new HuntAndKillMazeAlgorithm(mazeCells, seed);
-        ma.CreateMaze();
+        //MazeAlgorithm ma = new HuntAndKillMazeAlgorithm(mazeCells, seed);
+        //ma.CreateMaze();
     }
 
     private void DestroyMaze()

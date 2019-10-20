@@ -4,16 +4,10 @@ using System.Collections.Generic;
 
 public class MazePlayerHeuristic : Decision
 {
-    private MazeGeneratorArea MazePlayerArea;
     private MazeGeneratorPlayerAgent MazePlayerAgent;
     
     public override float[] Decide(List<float> vectorObs, List<Texture2D> visualObs, float reward, bool done, List<float> memory)
     {        
-        if (MazePlayerArea == null)
-        {
-            MazePlayerArea = GameObject.FindGameObjectWithTag("HeuristicArea").GetComponent<MazeGeneratorArea>();
-        }
-
         if (MazePlayerAgent == null)
         {
             MazePlayerAgent = GameObject.FindGameObjectWithTag("HeuristicAgent").GetComponent<MazeGeneratorPlayerAgent>();

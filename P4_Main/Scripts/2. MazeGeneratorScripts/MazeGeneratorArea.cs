@@ -6,8 +6,10 @@ using MLAgents;
 
 public class MazeGeneratorArea : Area
 {
-    public MazeGeneratorPlayerAgent MazeGeneratorPlayerAgent;
-    public MazeGeneratorAgent MazeGeneratorAgent;
+    public TextMeshPro Label;
+    public PCGMazeGeneratorPlayerAgent MazeGeneratorPlayerAgent;
+    public PCGMLMazeGeneratorAgent PCGMLMazeGeneratorAgent;
+    public PCGMazeGeneratorAgent PCGMazeGeneratorAgent;
     public GameObject PlayerGoal;
 
     public TextMeshPro Score;
@@ -23,11 +25,23 @@ public class MazeGeneratorArea : Area
     public bool PlayerFileCreated = false;
     public bool GeneratorFileCreated = false;
 
+    public bool UsePCGML = false;
+
     public override void ResetArea()
     {
         // Reset Maze       
         Score.text = $"Complexity: {complexity}";
 
-        MazeGeneratorAgent.AgentReset();
+        if (UsePCGML)
+        {
+            Destroy(PCGMazeGeneratorAgent);
+            PCGMLMazeGeneratorAgent.AgentReset();
+            Label.text = "Internal PCGML Generator";
+        }else
+        {
+            Destroy(PCGMLMazeGeneratorAgent);
+            PCGMazeGeneratorAgent.AgentReset();
+            Label.text = "Heuristic PCG Generator";
+        }
     }
 }

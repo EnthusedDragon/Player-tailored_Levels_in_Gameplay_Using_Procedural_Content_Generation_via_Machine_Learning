@@ -7,7 +7,7 @@ using MLAgents;
 public class PCGMazeGeneratorArea : Area
 {
     public PCGMazeGeneratorPlayerAgent PCGMazeGeneratorPlayerAgent;
-    public PCGMazeGenerator PCGMazeGenerator;
+    public PCGMazeGeneratorAgent PCGMazeGenerator;
     public GameObject PlayerGoal;
 
     public TextMeshPro Score;

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 // This agent script is used for executing the trained brains against the maze generator models.
 public class MazeGeneratorPlayerAgent : Agent
 {
-    public MazeGeneratorAgent MazeGeneratorAgent;
     private MazeGeneratorArea MazeGeneratorArea;
     private RayPerception3D RayPerception3D;
     private GameObject PlayerGoal;
@@ -177,7 +176,7 @@ public class MazeGeneratorPlayerAgent : Agent
 
                 if (diff > 10)
                 {
-                    MazeGeneratorAgent.AddReward(-((diff - 10) / 100 / stepsTaken));
+                    MazeGeneratorArea.PCGMLMazeGeneratorAgent.AddReward(-((diff - 10) / 100 / stepsTaken));
                 }
 
                 MazeGeneratorArea.levelCompleted++;
@@ -197,7 +196,7 @@ public class MazeGeneratorPlayerAgent : Agent
                         PlayerName,
                         PlayerType,
                         StepsTrained.ToString(),
-                        MazeGeneratorAgent.GeneratorName,
+                        MazeGeneratorArea.PCGMLMazeGeneratorAgent.GeneratorName,
                         MazeGeneratorArea.AverageScore.ToString(),
                         MistakesMade.ToString(),
                         MazeGeneratorArea.levelCompleted.ToString(),
