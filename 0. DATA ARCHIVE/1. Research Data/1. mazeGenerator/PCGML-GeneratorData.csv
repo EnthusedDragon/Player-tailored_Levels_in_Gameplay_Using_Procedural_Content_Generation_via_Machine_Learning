@@ -1,0 +1,10 @@
+GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToObserve;TotalMillisecondsToGenerate
+GeneratorName;GeneratorType;StepsTrained;PerfectMazesGenerated;MistakesMade;MazeNumber;MazeRows;MazeColumns;Seed;MazeComplexity;TotalMillisecondsToObserve;TotalMillisecondsToGenerate
+PCGML VS Heuristic;Internal;500000;1;0;1;8;8;[44134242223341444144];491,3667;1,9997;15,0275
+PCGML VS Heuristic;Internal;500000;2;0;2;9;2;[44432112244312244311];33,5;16,039;3,0005
+PCGML VS Heuristic;Internal;500000;3;0;3;9;8;[24122333244444324414];316,8667;33,1522;7,0006
+PCGML VS Heuristic;Internal;500000;4;0;4;2;6;[42433341231433324234];83,33334;16,2674;5,9701
+PCGML VS Heuristic;Internal;500000;5;0;5;8;8;[42242242213334141431];161,5512;16,9984;7,9787
+PCGML VS Heuristic;Internal;500000;6;0;6;2;2;[24213313124134443312];9;16,9859;1,0011
+PCGML VS Heuristic;Internal;500000;7;0;7;6;2;[23431324133433114143];121;16,918;1,9681
+PCGML VS Heuristic;Internal;500000;8;0;8;2;3;[44334131332334214311];9,333334;15,9186;0,9983
